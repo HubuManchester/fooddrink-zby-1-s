@@ -18,17 +18,14 @@
     <TabBar>
         <ShellContent
             Title="Foods"
-            Icon="{OnPlatform Default=''}"
             ContentTemplate="{DataTemplate local:MainPage}"
             Route="MainPage" />
         <ShellContent
             Title="Devices"
-            Icon="{OnPlatform Default=''}"
             ContentTemplate="{DataTemplate local:HardwarePage}"
             Route="HardwarePage" />
         <ShellContent
             Title="Settings"
-            Icon="{OnPlatform Default=''}"
             ContentTemplate="{DataTemplate local:SettingsPage}"
             Route="SettingsPage" />
     </TabBar>
