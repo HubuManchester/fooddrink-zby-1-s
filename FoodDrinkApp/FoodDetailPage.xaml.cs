@@ -3,8 +3,14 @@ using FoodDrinkApp.Services;
 
 namespace FoodDrinkApp;
 
+/// <summary>
+/// Displays full nutritional details for a single food or drink item.
+/// Receives the item ID via Shell query parameter and loads data from
+/// <see cref="FoodCatalogService"/>. Supports text-to-speech narration
+/// of the nutrition summary and vibration-based meal reminders.
+/// </summary>
 [QueryProperty(nameof(ItemId), "id")]
-public partial class FoodDetailPage : ContentPage
+public partial class FoodDetailPage : BasePage
 {
     private FoodItem? currentItem;
 
@@ -13,17 +19,7 @@ public partial class FoodDetailPage : ContentPage
         InitializeComponent();
     }
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        AccessibilityService.ApplyFontScale(this);
-    }
-
-    protected override void OnDisappearing()
-    {
-        SpeechService.Stop();
-        base.OnDisappearing();
-    }
+    /// <summary>Speech cancellation on navigation is handled by <see cref="BasePage"/>.</summary>
 
     public string ItemId
     {

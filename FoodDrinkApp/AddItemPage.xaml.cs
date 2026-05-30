@@ -3,21 +3,38 @@ using FoodDrinkApp.Services;
 
 namespace FoodDrinkApp;
 
-public partial class AddItemPage : ContentPage
+/// <summary>
+/// Form page for creating a new food or drink record.
+/// Performs client-side validation on all required fields before saving
+/// via <see cref="FoodCatalogService"/>. Displays an inline error panel
+/// with vibration feedback when validation fails.
+/// </summary>
+public partial class AddItemPage : BasePage
 {
+    /// <summary>Prevents duplicate save requests from rapid button taps.</summary>
+    private bool isSaving;
+
     public AddItemPage()
     {
         InitializeComponent();
     }
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        AccessibilityService.ApplyFontScale(this);
-    }
+    /// <summary>Base accessibility scaling is handled by <see cref="BasePage"/>.</summary>
 
+    /// <summary>
+    /// Validates the form, creates a <see cref="FoodItem"/> on success, persists it,
+    /// and navigates back to the main list. On validation failure, shows an inline
+    /// error panel and triggers a short vibration for tactile feedback.
+    /// Uses a guard flag to prevent duplicate saves from rapid taps.
+    /// </summary>
     private async void OnSaveClicked(object? sender, EventArgs e)
     {
+        if (isSaving)
+        {
+            return;
+        }
+
+        isSaving = true;
         try
         {
             var validationMessage = ValidateForm(out var calories, out var protein, out var carbs, out var fat);
@@ -58,7 +75,11 @@ public partial class AddItemPage : ContentPage
         }
         catch (Exception ex)
         {
-            ShowValidation($"The record could not be saved: {ex.Message}");
+            ShowValidation($"Unable to save the record — {ex.Message}");
+        }
+        finally
+        {
+            isSaving = false;
         }
     }
 
@@ -69,6 +90,11 @@ public partial class AddItemPage : ContentPage
         if (string.IsNullOrWhiteSpace(NameEntry.Text))
         {
             return "Please enter a food or drink name.";
+        }
+
+        if (NameEntry.Text.Trim().Length > 60)
+        {
+            return "Name is too long — please keep it under 60 characters.";
         }
 
         if (CategoryPicker.SelectedIndex < 0)
@@ -87,6 +113,10 @@ public partial class AddItemPage : ContentPage
             ?? TryReadNumber(FatEntry.Text, "fat", out fat);
     }
 
+    /// <summary>
+    /// Attempts to parse a non-negative integer from user input.
+    /// Returns an error message string on failure, or null on success.
+    /// </summary>
     private static string? TryReadNumber(string? value, string fieldName, out int number)
     {
         if (int.TryParse(value, out number) && number >= 0)

@@ -2,7 +2,13 @@ using FoodDrinkApp.Services;
 
 namespace FoodDrinkApp;
 
-public partial class SettingsPage : ContentPage
+/// <summary>
+/// Accessibility-focused settings page providing system/light/dark theme
+/// switching and a large-text toggle. Changes take effect immediately
+/// across the current page and persist (in-memory) when navigating to
+/// other pages.
+/// </summary>
+public partial class SettingsPage : BasePage
 {
     public SettingsPage()
     {
@@ -11,6 +17,10 @@ public partial class SettingsPage : ContentPage
         LargeTextSwitch.IsToggled = AccessibilityService.LargeTextEnabled;
     }
 
+    /// <summary>
+    /// Synchronises the switch state with the accessibility service on re-entry
+    /// (in case it was changed externally). Base font scaling is handled by <see cref="BasePage"/>.
+    /// </summary>
     protected override void OnAppearing()
     {
         base.OnAppearing();

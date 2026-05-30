@@ -2,17 +2,26 @@ using FoodDrinkApp.Services;
 
 namespace FoodDrinkApp;
 
-public partial class MainPage : ContentPage
+/// <summary>
+/// Primary landing page displaying the searchable food and drink list.
+/// Binds a <see cref="CollectionView"/> to data from <see cref="FoodCatalogService"/>
+/// and provides navigation to the detail and add-item pages via Shell routing.
+/// </summary>
+public partial class MainPage : BasePage
 {
     public MainPage()
     {
         InitializeComponent();
     }
 
+    /// <summary>
+    /// Refreshes the food list whenever the page becomes visible, ensuring
+    /// newly added items appear immediately after navigating back.
+    /// Base font scaling is handled by <see cref="BasePage"/>.
+    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        AccessibilityService.ApplyFontScale(this);
         await LoadFoodItemsAsync(SearchFoodBar.Text);
     }
 

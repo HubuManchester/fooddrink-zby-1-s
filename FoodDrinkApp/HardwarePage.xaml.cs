@@ -2,29 +2,40 @@ using FoodDrinkApp.Services;
 
 namespace FoodDrinkApp;
 
-public partial class HardwarePage : ContentPage
+/// <summary>
+/// Demonstrates five mobile hardware capabilities in a single page:
+/// camera capture, GPS location with reverse geocoding, text-to-speech,
+/// vibration, and haptic feedback. Each hardware interaction is wrapped
+/// in try-catch blocks with user-friendly status messages so the app
+/// never crashes during screencast demonstrations.
+/// </summary>
+public partial class HardwarePage : BasePage
 {
     private int feedbackTestCount;
+
+    /// <summary>Prevents duplicate hardware operations from rapid button taps.</summary>
+    private bool isHardwareBusy;
 
     public HardwarePage()
     {
         InitializeComponent();
     }
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-        AccessibilityService.ApplyFontScale(this);
-    }
-
+    /// <summary>Accessibility scaling and speech cancellation are handled by <see cref="BasePage"/>.</summary>
     protected override void OnDisappearing()
     {
-        SpeechService.Stop();
+        // BasePage handles speech stop; ensure we don't leave stale state
         base.OnDisappearing();
     }
 
     private async void OnTakePhotoClicked(object? sender, EventArgs e)
     {
+        if (isHardwareBusy)
+        {
+            return;
+        }
+
+        isHardwareBusy = true;
         try
         {
             if (!MediaPicker.Default.IsCaptureSupported)
@@ -54,12 +65,22 @@ public partial class HardwarePage : ContentPage
         }
         catch (Exception ex)
         {
-            SetStatus($"Camera error: {ex.Message}");
+            SetStatus($"Could not take photo — {ex.Message}");
+        }
+        finally
+        {
+            isHardwareBusy = false;
         }
     }
 
     private async void OnGetLocationClicked(object? sender, EventArgs e)
     {
+        if (isHardwareBusy)
+        {
+            return;
+        }
+
+        isHardwareBusy = true;
         try
         {
             SetStatus("Getting location...");
@@ -82,7 +103,11 @@ public partial class HardwarePage : ContentPage
         }
         catch (Exception ex)
         {
-            SetStatus($"Location error: {ex.Message}");
+            SetStatus($"Could not get location — {ex.Message}");
+        }
+        finally
+        {
+            isHardwareBusy = false;
         }
     }
 
@@ -148,6 +173,11 @@ public partial class HardwarePage : ContentPage
         return "Coordinates were found, but country and city were not returned by this device.";
     }
 
+    /// <summary>
+    /// Checks whether a location is within a given tolerance of known reference coordinates.
+    /// Used to detect emulator default locations (e.g. Google emulator at 37.422, -122.084)
+    /// and provide human-readable fallback addresses when the geocoding service is unavailable.
+    /// </summary>
     private static bool IsNear(Location location, double latitude, double longitude, double tolerance)
     {
         return Math.Abs(location.Latitude - latitude) <= tolerance &&
@@ -190,6 +220,10 @@ public partial class HardwarePage : ContentPage
         }
     }
 
+    /// <summary>
+    /// Updates the hardware status label and announces the message via the
+    /// screen reader, providing both visual and auditory feedback simultaneously.
+    /// </summary>
     private void SetStatus(string message)
     {
         HardwareStatusLabel.Text = message;

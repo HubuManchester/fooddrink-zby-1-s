@@ -4,8 +4,19 @@ using FoodDrinkApp.Models;
 
 namespace FoodDrinkApp.Services;
 
+/// <summary>
+/// Central data service for food and drink records.
+/// Prioritises data from the mockapi.io REST API configured in <see cref="MockApiConfig"/>.
+/// When the API is unreachable or unconfigured, falls back transparently to an in-memory
+/// collection of curated sample items, ensuring the app never shows a blank screen.
+/// All public methods are async to allow for future data-source extensibility.
+/// </summary>
 public static class FoodCatalogService
 {
+    /// <summary>
+    /// Shared <see cref="HttpClient"/> with a 12-second timeout to avoid hanging during
+    /// slow or unavailable network requests. Reused across all API calls for efficiency.
+    /// </summary>
     private static readonly HttpClient HttpClient = new()
     {
         Timeout = TimeSpan.FromSeconds(12)
@@ -70,8 +81,20 @@ public static class FoodCatalogService
 
     private static List<FoodItem> cachedItems = new(LocalFallbackItems);
 
+    /// <summary>
+    /// Indicates whether the most recent data load returned results from the API
+    /// (true) or from the local fallback (false). Drives the data-source announcement
+    /// spoken by the screen reader on refresh.
+    /// </summary>
     public static bool LastLoadUsedMockApi { get; private set; }
 
+    /// <summary>
+    /// Searches all food items by matching the query against name, category,
+    /// description, and tags (case-insensitive). An empty or null query returns
+    /// all items ordered alphabetically by name.
+    /// </summary>
+    /// <param name="query">Search term from the user; may be null or whitespace.</param>
+    /// <returns>Filtered and sorted list of matching items.</returns>
     public static async Task<IReadOnlyList<FoodItem>> SearchAsync(string? query)
     {
         var items = await GetAllAsync();
@@ -92,6 +115,13 @@ public static class FoodCatalogService
             .ToList();
     }
 
+    /// <summary>
+    /// Fetches a single food item by its unique identifier.
+    /// Attempts the API first when configured; otherwise searches the in-memory cache.
+    /// Returns null when no item matches the given ID.
+    /// </summary>
+    /// <param name="id">The unique identifier of the food item.</param>
+    /// <returns>The matching <see cref="FoodItem"/> or null if not found.</returns>
     public static async Task<FoodItem?> GetByIdAsync(string id)
     {
         if (MockApiConfig.IsConfigured)
@@ -116,6 +146,13 @@ public static class FoodCatalogService
         return cachedItems.FirstOrDefault(item => item.Id == id);
     }
 
+    /// <summary>
+    /// Adds a new food item to the data store. POSTs to the API when configured;
+    /// otherwise appends to the in-memory cache directly.
+    /// The returned item may differ from the input (e.g. the API may assign a server-generated ID).
+    /// </summary>
+    /// <param name="item">The food item to persist.</param>
+    /// <returns>The persisted item, potentially with server-assigned values.</returns>
     public static async Task<FoodItem> AddAsync(FoodItem item)
     {
         if (MockApiConfig.IsConfigured)
