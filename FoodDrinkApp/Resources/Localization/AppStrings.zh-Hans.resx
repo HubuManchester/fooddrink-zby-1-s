@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- App -->
+  <data name="AppName" xml:space="preserve">
+    <value>食光营养助手</value>
+  </data>
+  <data name="AppTagline" xml:space="preserve">
+    <value>记录每一餐，掌握你的营养。</value>
+  </data>
+
+  <!-- Tabs -->
+  <data name="TabFoods" xml:space="preserve">
+    <value>美食</value>
+  </data>
+  <data name="TabDevices" xml:space="preserve">
+    <value>设备</value>
+  </data>
+  <data name="TabSettings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+
+  <!-- MainPage -->
+  <data name="MainTitle" xml:space="preserve">
+    <value>食光营养助手</value>
+  </data>
+  <data name="MainTagline" xml:space="preserve">
+    <value>记录每一餐，掌握你的营养。</value>
+  </data>
+  <data name="MainRecommended" xml:space="preserve">
+    <value>为你推荐</value>
+  </data>
+  <data name="MainAllCategories" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="MainSearchPlaceholder" xml:space="preserve">
+    <value>搜索美食、饮品...</value>
+  </data>
+  <data name="MainEmptyList" xml:space="preserve">
+    <value>没有找到匹配的食品或饮品记录。</value>
+  </data>
+  <data name="MainRefreshSource" xml:space="preserve">
+    <value>列表已刷新。当前数据来源：{0}。</value>
+  </data>
+
+  <!-- AddItemPage -->
+  <data name="AddTitle" xml:space="preserve">
+    <value>新增记录</value>
+  </data>
+  <data name="AddBasicInfo" xml:space="preserve">
+    <value>基本信息</value>
+  </data>
+  <data name="AddNamePlaceholder" xml:space="preserve">
+    <value>食品或饮品名称 *</value>
+  </data>
+  <data name="AddCategoryTitle" xml:space="preserve">
+    <value>分类 *</value>
+  </data>
+  <data name="AddDescriptionPlaceholder" xml:space="preserve">
+    <value>描述这个食品或饮品 — 配料、风味、场景 *</value>
+  </data>
+  <data name="AddNutritionData" xml:space="preserve">
+    <value>营养数据</value>
+  </data>
+  <data name="AddCaloriesPlaceholder" xml:space="preserve">
+    <value>热量（千卡）*</value>
+  </data>
+  <data name="AddProteinPlaceholder" xml:space="preserve">
+    <value>蛋白质（克）</value>
+  </data>
+  <data name="AddCarbsPlaceholder" xml:space="preserve">
+    <value>碳水（克）</value>
+  </data>
+  <data name="AddFatPlaceholder" xml:space="preserve">
+    <value>脂肪（克）</value>
+  </data>
+  <data name="AddAllergyPlaceholder" xml:space="preserve">
+    <value>过敏提示或饮食限制</value>
+  </data>
+  <data name="AddSaveButton" xml:space="preserve">
+    <value>保存记录</value>
+  </data>
+  <data name="AddSaveSuccess" xml:space="preserve">
+    <value>已保存</value>
+  </data>
+  <data name="AddSaveSuccessApi" xml:space="preserve">
+    <value>记录已保存到 mockapi.io。</value>
+  </data>
+  <data name="AddSaveSuccessLocal" xml:space="preserve">
+    <value>记录已保存到本地数据。</value>
+  </data>
+  <data name="AddSavedAnnounce" xml:space="preserve">
+    <value>食品记录已保存。</value>
+  </data>
+  <data name="ValidationNameRequired" xml:space="preserve">
+    <value>请输入食品或饮品名称。</value>
+  </data>
+  <data name="ValidationNameTooLong" xml:space="preserve">
+    <value>名称过长 — 请控制在 60 个字符以内。</value>
+  </data>
+  <data name="ValidationCategory" xml:space="preserve">
+    <value>请选择一个分类。</value>
+  </data>
+  <data name="ValidationDescription" xml:space="preserve">
+    <value>请添加简短描述。</value>
+  </data>
+  <data name="ValidationNumber" xml:space="preserve">
+    <value>请输入 {0} 的有效非负数字。</value>
+  </data>
+  <data name="ValidationSaveFailed" xml:space="preserve">
+    <value>无法保存记录 — {0}</value>
+  </data>
+
+  <!-- FoodDetailPage -->
+  <data name="DetailNotFound" xml:space="preserve">
+    <value>未找到记录</value>
+  </data>
+  <data name="DetailNotFoundDesc" xml:space="preserve">
+    <value>无法加载所选食品或饮品。</value>
+  </data>
+  <data name="DetailPerServing" xml:space="preserve">
+    <value>每份</value>
+  </data>
+  <data name="DetailMacronutrients" xml:space="preserve">
+    <value>宏量营养素</value>
+  </data>
+  <data name="DetailProtein" xml:space="preserve">
+    <value>蛋白质</value>
+  </data>
+  <data name="DetailCarbs" xml:space="preserve">
+    <value>碳水化合物</value>
+  </data>
+  <data name="DetailFat" xml:space="preserve">
+    <value>脂肪</value>
+  </data>
+  <data name="DetailDescription" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="DetailAllergy" xml:space="preserve">
+    <value>过敏与饮食限制</value>
+  </data>
+  <data name="DetailReadSummary" xml:space="preserve">
+    <value>🔊 朗读摘要</value>
+  </data>
+  <data name="DetailReminder" xml:space="preserve">
+    <value>📳 提醒</value>
+  </data>
+  <data name="DetailMissingRecord" xml:space="preserve">
+    <value>缺少记录</value>
+  </data>
+  <data name="DetailNoSummary" xml:space="preserve">
+    <value>没有可朗读的营养摘要。</value>
+  </data>
+  <data name="DetailTtsUnavailable" xml:space="preserve">
+    <value>语音朗读不可用</value>
+  </data>
+  <data name="DetailReminderTitle" xml:space="preserve">
+    <value>提醒</value>
+  </data>
+  <data name="DetailReminderMsg" xml:space="preserve">
+    <value>震动反馈已触发 — 用餐提醒已设置。</value>
+  </data>
+  <data name="DetailVibrationUnavailable" xml:space="preserve">
+    <value>震动不可用</value>
+  </data>
+
+  <!-- HardwarePage -->
+  <data name="HwTitle" xml:space="preserve">
+    <value>设备功能</value>
+  </data>
+  <data name="HwCamera" xml:space="preserve">
+    <value>食物拍照</value>
+  </data>
+  <data name="HwCameraDesc" xml:space="preserve">
+    <value>拍摄餐食的外观与摆盘。</value>
+  </data>
+  <data name="HwCameraButton" xml:space="preserve">
+    <value>打开相机</value>
+  </data>
+  <data name="HwLocation" xml:space="preserve">
+    <value>用餐地点</value>
+  </data>
+  <data name="HwLocationDesc" xml:space="preserve">
+    <value>国家、城市、区域及 GPS 坐标。</value>
+  </data>
+  <data name="HwLocationButton" xml:space="preserve">
+    <value>获取位置</value>
+  </data>
+  <data name="HwLocationNone" xml:space="preserve">
+    <value>尚未获取位置。</value>
+  </data>
+  <data name="HwCoordsNone" xml:space="preserve">
+    <value>坐标将在此显示。</value>
+  </data>
+  <data name="HwSpeech" xml:space="preserve">
+    <value>文字转语音</value>
+  </data>
+  <data name="HwReadHelp" xml:space="preserve">
+    <value>朗读帮助</value>
+  </data>
+  <data name="HwStop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="HwVibration" xml:space="preserve">
+    <value>震动与触觉</value>
+  </data>
+  <data name="HwTestFeedback" xml:space="preserve">
+    <value>测试反馈</value>
+  </data>
+  <data name="HwCounterHint" xml:space="preserve">
+    <value>上方计数器随每次测试递增，用于录屏验证。</value>
+  </data>
+  <data name="HwReady" xml:space="preserve">
+    <value>就绪。</value>
+  </data>
+  <data name="HwCameraUnsupported" xml:space="preserve">
+    <value>此设备不支持拍照功能。</value>
+  </data>
+  <data name="HwPhotoCancelled" xml:space="preserve">
+    <value>拍照已取消。</value>
+  </data>
+  <data name="HwPhotoSuccess" xml:space="preserve">
+    <value>食物照片已成功拍摄。</value>
+  </data>
+  <data name="HwCameraPermission" xml:space="preserve">
+    <value>相机权限被拒绝。请在设备设置中启用相机访问。</value>
+  </data>
+  <data name="HwPhotoError" xml:space="preserve">
+    <value>无法拍照 — {0}</value>
+  </data>
+  <data name="HwGettingLocation" xml:space="preserve">
+    <value>正在获取位置...</value>
+  </data>
+  <data name="HwLocationNotFound" xml:space="preserve">
+    <value>无法获取当前位置。</value>
+  </data>
+  <data name="HwLocationSuccess" xml:space="preserve">
+    <value>国家、城市和坐标已加载。</value>
+  </data>
+  <data name="HwLocationPermission" xml:space="preserve">
+    <value>位置权限被拒绝。请在设备设置中启用位置访问。</value>
+  </data>
+  <data name="HwLocationError" xml:space="preserve">
+    <value>无法获取位置 — {0}</value>
+  </data>
+  <data name="HwSpeechError" xml:space="preserve">
+    <value>文字转语音错误：{0}</value>
+  </data>
+  <data name="HwSpeechStopped" xml:space="preserve">
+    <value>朗读已停止。</value>
+  </data>
+  <data name="HwFeedbackStatus" xml:space="preserve">
+    <value>震动和触觉反馈已触发。计数器变化可用于录屏验证。</value>
+  </data>
+  <data name="HwFeedbackError" xml:space="preserve">
+    <value>反馈错误：{0}</value>
+  </data>
+  <data name="HwHelpText" xml:space="preserve">
+    <value>食光营养助手可记录食品饮品、展示营养详情，并使用相机、定位、语音和触觉反馈让膳食追踪更加便捷。</value>
+  </data>
+
+  <!-- SettingsPage -->
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>无障碍</value>
+  </data>
+  <data name="SettingsAppearance" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="SettingsAppearanceDesc" xml:space="preserve">
+    <value>在跟随系统、浅色和深色主题之间切换。</value>
+  </data>
+  <data name="SettingsThemeTitle" xml:space="preserve">
+    <value>选择应用主题</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>跟随系统</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>浅色主题</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>深色主题</value>
+  </data>
+  <data name="SettingsLargeText" xml:space="preserve">
+    <value>大字体</value>
+  </data>
+  <data name="SettingsLargeTextDesc" xml:space="preserve">
+    <value>增大所有页面的文字大小。</value>
+  </data>
+  <data name="SettingsLargeTextPreview" xml:space="preserve">
+    <value>大字体预览</value>
+  </data>
+  <data name="SettingsLargeTextOn" xml:space="preserve">
+    <value>大字体预览：已放大</value>
+  </data>
+  <data name="SettingsLargeTextOnDesc" xml:space="preserve">
+    <value>文字已明显放大。所有页面将使用相同设置。</value>
+  </data>
+  <data name="SettingsLargeTextOffDesc" xml:space="preserve">
+    <value>开启此开关可放大预览文字和其他页面文字。</value>
+  </data>
+  <data name="SettingsLargeTextOnAnnounce" xml:space="preserve">
+    <value>大字体模式已开启。页面文字已放大。</value>
+  </data>
+  <data name="SettingsLargeTextOffAnnounce" xml:space="preserve">
+    <value>大字体模式已关闭。页面文字已恢复正常。</value>
+  </data>
+  <data name="SettingsThemeAnnounce" xml:space="preserve">
+    <value>主题偏好已更新。</value>
+  </data>
+  <data name="SettingsReady" xml:space="preserve">
+    <value>设置就绪。</value>
+  </data>
+
+  <!-- Language -->
+  <data name="SettingsLanguage" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="SettingsLanguageDesc" xml:space="preserve">
+    <value>更改应用的显示语言。</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="LanguageChinese" xml:space="preserve">
+    <value>中文</value>
+  </data>
+
+  <!-- Categories -->
+  <data name="CategoryBreakfast" xml:space="preserve">
+    <value>早餐</value>
+  </data>
+  <data name="CategoryLunch" xml:space="preserve">
+    <value>午餐</value>
+  </data>
+  <data name="CategoryDinner" xml:space="preserve">
+    <value>晚餐</value>
+  </data>
+  <data name="CategorySnack" xml:space="preserve">
+    <value>零食</value>
+  </data>
+  <data name="CategoryDrink" xml:space="preserve">
+    <value>饮品</value>
+  </data>
+</root>

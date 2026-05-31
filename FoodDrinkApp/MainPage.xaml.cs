@@ -1,18 +1,16 @@
+using FoodDrinkApp.Models;
 using FoodDrinkApp.Services;
 
 namespace FoodDrinkApp;
 
 /// <summary>
-/// Primary landing page displaying the searchable food and drink list.
-/// Features a horizontal category filter bar, floating search,
-/// and a FAB for adding items — inspired by real-world food tracking apps.
+/// Recommendation-style home page with a featured horizontal carousel,
+/// category filter chips, searchable food list, and a FAB for adding items.
+/// All user-facing text is localised via <see cref="LocalizationService"/>.
 /// </summary>
 public partial class MainPage : BasePage
 {
-    /// <summary>Currently selected category filter. An empty string means "All".</summary>
     private string selectedCategory = string.Empty;
-
-    /// <summary>All distinct categories from the loaded data, used to build filter chips.</summary>
     private readonly List<string> allCategories = ["All"];
 
     public MainPage()
@@ -20,42 +18,107 @@ public partial class MainPage : BasePage
         InitializeComponent();
     }
 
-    /// <summary>
-    /// Refreshes the food list and rebuilds category chips whenever the page becomes visible,
-    /// ensuring newly added items and categories appear immediately.
-    /// </summary>
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        await LoadFoodItemsAsync(SearchFoodBar.Text);
+        await LoadAllAsync(SearchFoodBar.Text);
     }
 
-    /// <summary>Loads items via the service and rebuilds both list and category chips.</summary>
-    private async Task LoadFoodItemsAsync(string? query = null)
+    private async Task LoadAllAsync(string? query = null)
     {
         var items = await FoodCatalogService.SearchAsync(query);
-
-        // Rebuild category list from all items (not filtered)
         var unfiltered = await FoodCatalogService.SearchAsync(null);
+        BuildRecommended(unfiltered);
         RebuildCategories(unfiltered);
 
-        // Apply category filter on top of search
         if (!string.IsNullOrWhiteSpace(selectedCategory) && selectedCategory != "All")
-        {
-            items = items
-                .Where(i => i.Category == selectedCategory)
-                .OrderBy(i => i.Name)
-                .ToList();
-        }
+            items = items.Where(i => i.Category == selectedCategory)
+                         .OrderBy(i => i.Name).ToList();
 
         FoodCollection.ItemsSource = items;
     }
 
     /// <summary>
-    /// Builds the horizontal category chip list from the available categories.
-    /// Chips use a pill/tag style — the active chip is filled; others are outlined.
+    /// Builds a horizontal strip of up to 4 featured items as compact cards.
+    /// These act as "recommended" entries and are tappable to open the detail page.
     /// </summary>
-    private void RebuildCategories(IReadOnlyList<Models.FoodItem> items)
+    private void BuildRecommended(IReadOnlyList<FoodItem> items)
+    {
+        RecommendedItems.Children.Clear();
+        var featured = items.Take(4).ToList();
+        foreach (var item in featured)
+        {
+            RecommendedItems.Children.Add(CreateRecommendedCard(item));
+        }
+    }
+
+    private Border CreateRecommendedCard(FoodItem item)
+    {
+        var card = new Border
+        {
+            StrokeThickness = 0,
+            BackgroundColor = Color.FromArgb("#FFFFFF"),
+            Padding = new Thickness(12),
+            WidthRequest = 150,
+            HeightRequest = 110,
+            StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 12 }
+        };
+        card.Shadow = new Shadow
+        {
+            Brush = new SolidColorBrush(Color.FromArgb("#18000000")),
+            Offset = new Point(0, 2),
+            Radius = 8,
+            Opacity = 0.10f
+        };
+
+        var grid = new Grid
+        {
+            RowDefinitions =
+            {
+                new RowDefinition(GridLength.Auto),
+                new RowDefinition(GridLength.Auto),
+                new RowDefinition(GridLength.Star)
+            },
+            RowSpacing = 4
+        };
+
+        grid.Add(new Label
+        {
+            Text = item.Name,
+            FontSize = 13,
+            FontAttributes = FontAttributes.Bold,
+            TextColor = Color.FromArgb("#1E1510"),
+            LineBreakMode = LineBreakMode.TailTruncation,
+            MaxLines = 2
+        }, 0, 0);
+
+        grid.Add(new Label
+        {
+            Text = item.CaloriesLabel,
+            FontSize = 12,
+            FontAttributes = FontAttributes.Bold,
+            TextColor = Color.FromArgb("#D9472B")
+        }, 0, 1);
+
+        grid.Add(new Label
+        {
+            Text = item.Category,
+            FontSize = 11,
+            TextColor = Color.FromArgb("#B87A4A"),
+            VerticalOptions = LayoutOptions.End
+        }, 0, 2);
+
+        card.Content = grid;
+
+        var tap = new TapGestureRecognizer();
+        tap.Tapped += (_, _) => _ = Shell.Current.GoToAsync(
+            $"{nameof(FoodDetailPage)}?id={Uri.EscapeDataString(item.Id)}");
+        card.GestureRecognizers.Add(tap);
+
+        return card;
+    }
+
+    private void RebuildCategories(IReadOnlyList<FoodItem> items)
     {
         var distinct = items
             .Select(i => i.Category)
@@ -64,41 +127,30 @@ public partial class MainPage : BasePage
             .OrderBy(c => c)
             .ToList();
 
-        // Always keep "All" at position 0
-        var categories = new List<string> { "All" };
-        categories.AddRange(distinct.Where(c => c != "All"));
+        var categories = new List<string> { LocalizationService.Get("MainAllCategories") };
+        categories.AddRange(distinct.Where(c => c != "All" && c != LocalizationService.Get("MainAllCategories")));
 
-        // Only rebuild if categories actually changed
-        if (categories.SequenceEqual(allCategories))
-        {
-            return;
-        }
+        if (categories.SequenceEqual(allCategories)) return;
 
         allCategories.Clear();
         allCategories.AddRange(categories);
-
         CategoryChips.Children.Clear();
+
         foreach (var cat in categories)
-        {
-            var chip = CreateCategoryChip(cat);
-            CategoryChips.Children.Add(chip);
-        }
+            CategoryChips.Children.Add(CreateCategoryChip(cat));
     }
 
-    /// <summary>Creates a single category filter chip as a tappable Border+Label.</summary>
     private Border CreateCategoryChip(string category)
     {
         var isActive = category == selectedCategory ||
-                       (category == "All" && string.IsNullOrWhiteSpace(selectedCategory));
+                       (category == LocalizationService.Get("MainAllCategories") && string.IsNullOrWhiteSpace(selectedCategory));
 
         var label = new Label
         {
             Text = category,
             FontSize = 13,
             FontAttributes = FontAttributes.Bold,
-            TextColor = isActive
-                ? Colors.White
-                : Color.FromArgb("#B87A4A"),
+            TextColor = isActive ? Colors.White : Color.FromArgb("#B87A4A"),
             Padding = new Thickness(14, 6)
         };
 
@@ -107,43 +159,31 @@ public partial class MainPage : BasePage
             Content = label,
             StrokeThickness = isActive ? 0 : 1,
             Stroke = Color.FromArgb("#F0D6B8"),
-            BackgroundColor = isActive
-                ? Color.FromArgb("#D9472B")
-                : Colors.Transparent,
+            BackgroundColor = isActive ? Color.FromArgb("#D9472B") : Colors.Transparent,
             StrokeShape = new Microsoft.Maui.Controls.Shapes.RoundRectangle { CornerRadius = 16 },
             Padding = new Thickness(0)
         };
 
         var tap = new TapGestureRecognizer();
-        tap.Tapped += (_, _) => OnCategoryTapped(category);
+        tap.Tapped += async (_, _) => await OnCategoryTapped(category);
         border.GestureRecognizers.Add(tap);
-
         return border;
     }
 
-    /// <summary>Handles category chip taps — sets the filter and refreshes the list.</summary>
-    private async void OnCategoryTapped(string category)
+    private async Task OnCategoryTapped(string category)
     {
-        selectedCategory = category == "All" ? string.Empty : category;
+        selectedCategory = category == LocalizationService.Get("MainAllCategories") ? string.Empty : category;
 
-        // Refresh chip visuals
-        RebuildCategories([.. allCategories.Select(_ => new Models.FoodItem { Category = _ })]);
-
-        // Actually rebuild from real data
         var unfiltered = await FoodCatalogService.SearchAsync(null);
         RebuildCategories(unfiltered);
-
-        await LoadFoodItemsAsync(SearchFoodBar.Text);
+        await LoadAllAsync(SearchFoodBar.Text);
     }
 
-    /// <summary>Card tap opens the detail page (same as the old Details button).</summary>
     private async void OnFoodCardTapped(object? sender, TappedEventArgs e)
     {
         if (e.Parameter is string id)
-        {
             await Shell.Current.GoToAsync(
                 $"{nameof(FoodDetailPage)}?id={Uri.EscapeDataString(id)}");
-        }
     }
 
     private async void OnAddClicked(object? sender, EventArgs e)
@@ -153,19 +193,20 @@ public partial class MainPage : BasePage
 
     private async void OnSearchTextChanged(object? sender, TextChangedEventArgs e)
     {
-        await LoadFoodItemsAsync(e.NewTextValue);
+        await LoadAllAsync(e.NewTextValue);
     }
 
     private async void OnSearchButtonPressed(object? sender, EventArgs e)
     {
-        await LoadFoodItemsAsync(SearchFoodBar.Text);
+        await LoadAllAsync(SearchFoodBar.Text);
     }
 
     private async void OnRefreshing(object? sender, EventArgs e)
     {
-        await LoadFoodItemsAsync(SearchFoodBar.Text);
+        await LoadAllAsync(SearchFoodBar.Text);
         FoodRefreshView.IsRefreshing = false;
         var source = FoodCatalogService.LastLoadUsedMockApi ? "mockapi.io" : "local fallback data";
-        SemanticScreenReader.Announce($"Food and drink list refreshed. Current source: {source}.");
+        SemanticScreenReader.Announce(
+            LocalizationService.Get("MainRefreshSource", source));
     }
 }

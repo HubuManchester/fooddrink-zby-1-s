@@ -57,6 +57,9 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+
+		<!-- Exclude RESX from MauiAsset copy; SDK includes them as EmbeddedResource by default -->
+		<MauiAsset Remove="Resources\Localization\**" />
 	</ItemGroup>
 
 	<ItemGroup>

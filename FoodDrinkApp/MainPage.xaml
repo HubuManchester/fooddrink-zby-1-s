@@ -2,52 +2,69 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:FoodDrinkApp.Models"
              xmlns:local="clr-namespace:FoodDrinkApp"
+             xmlns:l10n="clr-namespace:FoodDrinkApp.Services"
              x:Class="FoodDrinkApp.MainPage"
              Shell.NavBarIsVisible="False"
              Title="NutriBite">
 
-    <Grid RowDefinitions="Auto,Auto,*,Auto"
+    <Grid RowDefinitions="Auto,Auto,Auto,*,Auto"
           BackgroundColor="{AppThemeBinding Light=#FEFAF3, Dark=#0F1210}"
           Padding="0">
 
-        <!-- ===== Hero header ===== -->
+        <!-- Hero header -->
         <Grid Padding="20,24,20,16"
               BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191B18}">
             <Grid.Shadow>
                 <Shadow Brush="#0C000000" Offset="0,1" Radius="4" Opacity="0.08" />
             </Grid.Shadow>
             <Grid RowDefinitions="Auto,Auto" RowSpacing="2">
-                <Label Text="食光营养助手"
-                       FontSize="26"
-                       FontAttributes="Bold"
+                <Label Text="{l10n:Translate MainTitle}"
+                       FontSize="26" FontAttributes="Bold"
                        TextColor="{AppThemeBinding Light=#D9472B, Dark=#FF9C7B}" />
                 <Label Grid.Row="1"
-                       Text="Track every bite, own your nutrition."
+                       Text="{l10n:Translate MainTagline}"
                        FontSize="13"
                        TextColor="{AppThemeBinding Light=#9A7B63, Dark=#BFA58E}" />
             </Grid>
         </Grid>
 
-        <!-- ===== Category filter chips ===== -->
-        <ScrollView Grid.Row="1"
+        <!-- Recommended for you — horizontal scroll -->
+        <VerticalStackLayout Grid.Row="1" Margin="0,8,0,0" Spacing="4">
+            <Label Text="{l10n:Translate MainRecommended}"
+                   FontSize="15" FontAttributes="Bold"
+                   TextColor="{AppThemeBinding Light=#3A2518, Dark=#D8C0A0}"
+                   Margin="20,0,0,0" />
+            <ScrollView Orientation="Horizontal"
+                        HorizontalScrollBarVisibility="Never"
+                        Padding="20,0">
+                <HorizontalStackLayout x:Name="RecommendedItems" Spacing="10" />
+            </ScrollView>
+        </VerticalStackLayout>
+
+        <!-- Category filter chips -->
+        <ScrollView Grid.Row="2"
                     Orientation="Horizontal"
                     HorizontalScrollBarVisibility="Never"
-                    Margin="0,4,0,0"
+                    Margin="0,2,0,0"
                     Padding="20,0">
             <HorizontalStackLayout x:Name="CategoryChips"
                                    Spacing="8"
-                                   Padding="0,10,0,8">
-                <!-- Chips populated in code-behind -->
-            </HorizontalStackLayout>
+                                   Padding="0,8,0,6" />
         </ScrollView>
 
-        <!-- ===== Food list ===== -->
-        <RefreshView Grid.Row="2" x:Name="FoodRefreshView" Refreshing="OnRefreshing">
+        <!-- Food list -->
+        <RefreshView Grid.Row="3" x:Name="FoodRefreshView" Refreshing="OnRefreshing">
             <CollectionView x:Name="FoodCollection"
                             SelectionMode="None"
-                            EmptyView="No matching food or drink records."
                             ItemsLayout="VerticalList"
-                            Margin="0,6,0,0">
+                            Margin="0,4,0,0">
+                <CollectionView.EmptyView>
+                    <Label Text="{l10n:Translate MainEmptyList}"
+                           FontSize="14"
+                           TextColor="{AppThemeBinding Light=#BFA58E, Dark=#8A7A68}"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,40,0,0" />
+                </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:FoodItem">
                         <Border StrokeThickness="0"
@@ -60,47 +77,32 @@
                             <Border.Shadow>
                                 <Shadow Brush="#12000000" Offset="0,2" Radius="8" Opacity="0.10" />
                             </Border.Shadow>
-                            <Grid ColumnDefinitions="5,*"
-                                  MinimumHeightRequest="90">
-                                <!-- Left accent strip = category colour -->
+                            <Grid ColumnDefinitions="5,*" MinimumHeightRequest="90">
                                 <BoxView Color="{AppThemeBinding Light=#D9472B, Dark=#FF7D55}" />
-
-                                <Grid Grid.Column="1"
-                                      Padding="14,12"
+                                <Grid Grid.Column="1" Padding="14,12"
                                       RowDefinitions="Auto,Auto,Auto"
                                       ColumnDefinitions="*,Auto"
                                       RowSpacing="6">
-                                    <!-- Name + calories pill -->
                                     <Label Text="{Binding Name}"
-                                           FontSize="17"
-                                           FontAttributes="Bold"
+                                           FontSize="17" FontAttributes="Bold"
                                            TextColor="{AppThemeBinding Light=#1E1510, Dark=#F5EDE4}"
-                                           LineBreakMode="TailTruncation"
-                                           SemanticProperties.HeadingLevel="Level2" />
-                                    <Border Grid.Column="1"
-                                            StrokeThickness="0"
+                                           LineBreakMode="TailTruncation" />
+                                    <Border Grid.Column="1" StrokeThickness="0"
                                             BackgroundColor="{AppThemeBinding Light=#FFF2E0, Dark=#3D2E1C}"
-                                            Padding="10,4"
-                                            VerticalOptions="Center">
+                                            Padding="10,4" VerticalOptions="Center">
                                         <Border.StrokeShape>
                                             <RoundRectangle CornerRadius="20" />
                                         </Border.StrokeShape>
                                         <Label Text="{Binding CaloriesLabel}"
-                                               FontSize="12"
-                                               FontAttributes="Bold"
+                                               FontSize="12" FontAttributes="Bold"
                                                TextColor="{AppThemeBinding Light=#C75B1A, Dark=#FFB87A}" />
                                     </Border>
-                                    <!-- Macro summary -->
-                                    <Label Grid.Row="1"
-                                           Grid.ColumnSpan="2"
+                                    <Label Grid.Row="1" Grid.ColumnSpan="2"
                                            Text="{Binding MacroSummary}"
                                            FontSize="13"
                                            TextColor="{AppThemeBinding Light=#5A7A5A, Dark=#7CB87C}" />
-                                    <!-- Category tag + detail arrow -->
-                                    <HorizontalStackLayout Grid.Row="2"
-                                                           Grid.ColumnSpan="2"
-                                                           Spacing="8"
-                                                           VerticalOptions="End">
+                                    <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2"
+                                                           Spacing="8" VerticalOptions="End">
                                         <Border StrokeThickness="1"
                                                 Stroke="{AppThemeBinding Light=#F0D6B8, Dark=#4A3A28}"
                                                 BackgroundColor="{AppThemeBinding Light=#FFF8F0, Dark=#2A2218}"
@@ -125,17 +127,15 @@
             </CollectionView>
         </RefreshView>
 
-        <!-- ===== Search bar + FAB overlay ===== -->
-        <Grid Grid.Row="3"
+        <!-- Search + FAB -->
+        <Grid Grid.Row="4"
               ColumnDefinitions="*,Auto"
               Padding="16,0,16,16"
               Margin="0,-60,0,0"
               ColumnSpacing="12">
-            <!-- Floating search bar -->
             <Border StrokeThickness="0"
                     BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#292B28}"
-                    Padding="0"
-                    VerticalOptions="End">
+                    Padding="0" VerticalOptions="End">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="24" />
                 </Border.StrokeShape>
@@ -143,29 +143,23 @@
                     <Shadow Brush="#18000000" Offset="0,4" Radius="16" Opacity="0.14" />
                 </Border.Shadow>
                 <SearchBar x:Name="SearchFoodBar"
-                           Placeholder="Search foods, drinks..."
+                           Placeholder="{l10n:Translate MainSearchPlaceholder}"
                            TextChanged="OnSearchTextChanged"
                            SearchButtonPressed="OnSearchButtonPressed"
                            TextColor="{AppThemeBinding Light=#3A2518, Dark=#F5EDE4}"
                            PlaceholderColor="{AppThemeBinding Light=#BFA58E, Dark=#8A7A68}"
                            BackgroundColor="Transparent"
-                           SemanticProperties.Hint="Search the food and drink list"
                            CancelButtonColor="{AppThemeBinding Light=#D9472B, Dark=#FF9C7B}" />
             </Border>
-            <!-- FAB: Add -->
             <Button Grid.Column="1"
                     Text="+"
-                    FontSize="26"
-                    FontAttributes="Bold"
-                    WidthRequest="52"
-                    HeightRequest="52"
-                    CornerRadius="26"
-                    Padding="0"
+                    FontSize="26" FontAttributes="Bold"
+                    WidthRequest="52" HeightRequest="52"
+                    CornerRadius="26" Padding="0"
                     BackgroundColor="{AppThemeBinding Light=#D9472B, Dark=#FF6B3D}"
                     TextColor="#FFFFFF"
                     Clicked="OnAddClicked"
-                    VerticalOptions="End"
-                    SemanticProperties.Hint="Add a new food or drink record" />
+                    VerticalOptions="End" />
         </Grid>
     </Grid>
 </local:BasePage>

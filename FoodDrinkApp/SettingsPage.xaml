@@ -1,17 +1,52 @@
 <local:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:FoodDrinkApp"
+             xmlns:l10n="clr-namespace:FoodDrinkApp.Services"
              x:Class="FoodDrinkApp.SettingsPage"
-             Title="Settings">
+             Title="{l10n:Translate TabSettings}">
 
     <ScrollView BackgroundColor="{AppThemeBinding Light=#FEFAF3, Dark=#0F1210}">
         <VerticalStackLayout Padding="16,12,16,24" Spacing="14">
 
-            <Label Text="Accessibility"
+            <Label Text="{l10n:Translate SettingsTitle}"
                    FontSize="22"
                    FontAttributes="Bold"
                    TextColor="{AppThemeBinding Light=#1E1510, Dark=#F5EDE4}"
                    Margin="4,4,0,4" />
+
+            <!-- ===== Language card ===== -->
+            <Border StrokeThickness="0"
+                    BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E201D}"
+                    Padding="18">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{l10n:Translate SettingsLanguage}"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light=#D9472B, Dark=#FF9C7B}" />
+                    <Label Text="{l10n:Translate SettingsLanguageDesc}"
+                           FontSize="12"
+                           TextColor="{AppThemeBinding Light=#BFA58E, Dark=#8A7A68}" />
+                    <HorizontalStackLayout Spacing="12">
+                        <Button x:Name="EnglishButton"
+                                Text="{l10n:Translate LanguageEnglish}"
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                CornerRadius="10"
+                                Padding="16,8"
+                                Clicked="OnEnglishClicked" />
+                        <Button x:Name="ChineseButton"
+                                Text="{l10n:Translate LanguageChinese}"
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                CornerRadius="10"
+                                Padding="16,8"
+                                Clicked="OnChineseClicked" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
 
             <!-- ===== Theme card ===== -->
             <Border StrokeThickness="0"
@@ -21,23 +56,16 @@
                     <RoundRectangle CornerRadius="14" />
                 </Border.StrokeShape>
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Appearance"
+                    <Label Text="{l10n:Translate SettingsAppearance}"
                            FontSize="16"
                            FontAttributes="Bold"
                            TextColor="{AppThemeBinding Light=#D9472B, Dark=#FF9C7B}" />
-                    <Label Text="Switch between system, light, and dark themes."
+                    <Label Text="{l10n:Translate SettingsAppearanceDesc}"
                            FontSize="12"
                            TextColor="{AppThemeBinding Light=#BFA58E, Dark=#8A7A68}" />
                     <Picker x:Name="ThemePicker"
-                            Title="Choose app theme"
-                            SelectedIndexChanged="OnThemeChanged"
-                            SemanticProperties.Hint="Switch between system, light, and dark theme">
-                        <Picker.Items>
-                            <x:String>Use system theme</x:String>
-                            <x:String>Light theme</x:String>
-                            <x:String>Dark theme</x:String>
-                        </Picker.Items>
-                    </Picker>
+                            Title="{l10n:Translate SettingsThemeTitle}"
+                            SelectedIndexChanged="OnThemeChanged" />
                 </VerticalStackLayout>
             </Border>
 
@@ -51,38 +79,31 @@
                 <VerticalStackLayout Spacing="10">
                     <Grid ColumnDefinitions="*,Auto">
                         <VerticalStackLayout Spacing="2">
-                            <Label Text="Large text"
+                            <Label Text="{l10n:Translate SettingsLargeText}"
                                    FontSize="16"
                                    FontAttributes="Bold"
                                    TextColor="{AppThemeBinding Light=#2F7A4F, Dark=#8CE6A1}" />
-                            <Label Text="Increases text size across all pages."
+                            <Label Text="{l10n:Translate SettingsLargeTextDesc}"
                                    FontSize="12"
                                    TextColor="{AppThemeBinding Light=#BFA58E, Dark=#8A7A68}" />
                         </VerticalStackLayout>
                         <Switch x:Name="LargeTextSwitch"
                                 Grid.Column="1"
-                                Toggled="OnLargeTextToggled"
-                                SemanticProperties.Hint="Increase text size across the current session" />
+                                Toggled="OnLargeTextToggled" />
                     </Grid>
-
                     <BoxView HeightRequest="1"
                              Color="{AppThemeBinding Light=#F0E8DC, Dark=#3A3028}" />
-
                     <Label x:Name="LargeTextPreviewTitle"
-                           Text="Large text preview"
                            FontSize="20"
                            FontAttributes="Bold"
                            TextColor="{AppThemeBinding Light=#B87A4A, Dark=#D9A67A}" />
                     <Label x:Name="LargeTextPreviewBody"
-                           Text="Turn on the switch to enlarge this preview and other page text."
                            FontSize="15"
                            TextColor="{AppThemeBinding Light=#6E5A47, Dark=#C8B8A5}" />
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Status -->
             <Label x:Name="SettingsStatusLabel"
-                   Text="Settings ready."
                    FontSize="12"
                    FontAttributes="Bold"
                    TextColor="{AppThemeBinding Light=#BFA58E, Dark=#8A7A68}"

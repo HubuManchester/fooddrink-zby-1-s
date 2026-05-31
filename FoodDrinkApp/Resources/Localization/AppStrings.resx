@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- App -->
+  <data name="AppName" xml:space="preserve">
+    <value>NutriBite</value>
+  </data>
+  <data name="AppTagline" xml:space="preserve">
+    <value>Track every bite, own your nutrition.</value>
+  </data>
+
+  <!-- Tabs -->
+  <data name="TabFoods" xml:space="preserve">
+    <value>Foods</value>
+  </data>
+  <data name="TabDevices" xml:space="preserve">
+    <value>Devices</value>
+  </data>
+  <data name="TabSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+
+  <!-- MainPage -->
+  <data name="MainTitle" xml:space="preserve">
+    <value>NutriBite</value>
+  </data>
+  <data name="MainTagline" xml:space="preserve">
+    <value>Track every bite, own your nutrition.</value>
+  </data>
+  <data name="MainRecommended" xml:space="preserve">
+    <value>Recommended for you</value>
+  </data>
+  <data name="MainAllCategories" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="MainSearchPlaceholder" xml:space="preserve">
+    <value>Search foods, drinks...</value>
+  </data>
+  <data name="MainEmptyList" xml:space="preserve">
+    <value>No matching food or drink records.</value>
+  </data>
+  <data name="MainRefreshSource" xml:space="preserve">
+    <value>Food and drink list refreshed. Current source: {0}.</value>
+  </data>
+
+  <!-- AddItemPage -->
+  <data name="AddTitle" xml:space="preserve">
+    <value>New Record</value>
+  </data>
+  <data name="AddBasicInfo" xml:space="preserve">
+    <value>Basic information</value>
+  </data>
+  <data name="AddNamePlaceholder" xml:space="preserve">
+    <value>Food or drink name *</value>
+  </data>
+  <data name="AddCategoryTitle" xml:space="preserve">
+    <value>Category *</value>
+  </data>
+  <data name="AddDescriptionPlaceholder" xml:space="preserve">
+    <value>Describe this food or drink — ingredients, flavour, context *</value>
+  </data>
+  <data name="AddNutritionData" xml:space="preserve">
+    <value>Nutrition data</value>
+  </data>
+  <data name="AddCaloriesPlaceholder" xml:space="preserve">
+    <value>Calories *</value>
+  </data>
+  <data name="AddProteinPlaceholder" xml:space="preserve">
+    <value>Protein (g)</value>
+  </data>
+  <data name="AddCarbsPlaceholder" xml:space="preserve">
+    <value>Carbs (g)</value>
+  </data>
+  <data name="AddFatPlaceholder" xml:space="preserve">
+    <value>Fat (g)</value>
+  </data>
+  <data name="AddAllergyPlaceholder" xml:space="preserve">
+    <value>Allergy note or dietary info</value>
+  </data>
+  <data name="AddSaveButton" xml:space="preserve">
+    <value>Save record</value>
+  </data>
+  <data name="AddSaveSuccess" xml:space="preserve">
+    <value>Saved</value>
+  </data>
+  <data name="AddSaveSuccessApi" xml:space="preserve">
+    <value>The record has been saved to mockapi.io.</value>
+  </data>
+  <data name="AddSaveSuccessLocal" xml:space="preserve">
+    <value>The record has been saved to local data.</value>
+  </data>
+  <data name="AddSavedAnnounce" xml:space="preserve">
+    <value>Food record saved.</value>
+  </data>
+  <data name="ValidationNameRequired" xml:space="preserve">
+    <value>Please enter a food or drink name.</value>
+  </data>
+  <data name="ValidationNameTooLong" xml:space="preserve">
+    <value>Name is too long — please keep it under 60 characters.</value>
+  </data>
+  <data name="ValidationCategory" xml:space="preserve">
+    <value>Please choose a category.</value>
+  </data>
+  <data name="ValidationDescription" xml:space="preserve">
+    <value>Please add a short description.</value>
+  </data>
+  <data name="ValidationNumber" xml:space="preserve">
+    <value>Please enter a valid non-negative number for {0}.</value>
+  </data>
+  <data name="ValidationSaveFailed" xml:space="preserve">
+    <value>Unable to save the record — {0}</value>
+  </data>
+
+  <!-- FoodDetailPage -->
+  <data name="DetailNotFound" xml:space="preserve">
+    <value>Record not found</value>
+  </data>
+  <data name="DetailNotFoundDesc" xml:space="preserve">
+    <value>The selected food or drink could not be loaded.</value>
+  </data>
+  <data name="DetailPerServing" xml:space="preserve">
+    <value>per serving</value>
+  </data>
+  <data name="DetailMacronutrients" xml:space="preserve">
+    <value>Macronutrients</value>
+  </data>
+  <data name="DetailProtein" xml:space="preserve">
+    <value>Protein</value>
+  </data>
+  <data name="DetailCarbs" xml:space="preserve">
+    <value>Carbs</value>
+  </data>
+  <data name="DetailFat" xml:space="preserve">
+    <value>Fat</value>
+  </data>
+  <data name="DetailDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DetailAllergy" xml:space="preserve">
+    <value>Allergy &amp; Dietary</value>
+  </data>
+  <data name="DetailReadSummary" xml:space="preserve">
+    <value>🔊 Read summary</value>
+  </data>
+  <data name="DetailReminder" xml:space="preserve">
+    <value>📳 Reminder</value>
+  </data>
+  <data name="DetailMissingRecord" xml:space="preserve">
+    <value>Missing record</value>
+  </data>
+  <data name="DetailNoSummary" xml:space="preserve">
+    <value>There is no nutrition summary to read.</value>
+  </data>
+  <data name="DetailTtsUnavailable" xml:space="preserve">
+    <value>Text to speech unavailable</value>
+  </data>
+  <data name="DetailReminderTitle" xml:space="preserve">
+    <value>Reminder</value>
+  </data>
+  <data name="DetailReminderMsg" xml:space="preserve">
+    <value>Vibration feedback triggered — your meal reminder is set.</value>
+  </data>
+  <data name="DetailVibrationUnavailable" xml:space="preserve">
+    <value>Vibration unavailable</value>
+  </data>
+
+  <!-- HardwarePage -->
+  <data name="HwTitle" xml:space="preserve">
+    <value>Device Capabilities</value>
+  </data>
+  <data name="HwCamera" xml:space="preserve">
+    <value>Food photo</value>
+  </data>
+  <data name="HwCameraDesc" xml:space="preserve">
+    <value>Capture meal appearance and plating.</value>
+  </data>
+  <data name="HwCameraButton" xml:space="preserve">
+    <value>Open camera</value>
+  </data>
+  <data name="HwLocation" xml:space="preserve">
+    <value>Meal location</value>
+  </data>
+  <data name="HwLocationDesc" xml:space="preserve">
+    <value>Country, city, region, and GPS coordinates.</value>
+  </data>
+  <data name="HwLocationButton" xml:space="preserve">
+    <value>Get location</value>
+  </data>
+  <data name="HwLocationNone" xml:space="preserve">
+    <value>Location has not been captured yet.</value>
+  </data>
+  <data name="HwCoordsNone" xml:space="preserve">
+    <value>Coordinates will appear here.</value>
+  </data>
+  <data name="HwSpeech" xml:space="preserve">
+    <value>Text to speech</value>
+  </data>
+  <data name="HwReadHelp" xml:space="preserve">
+    <value>Read help</value>
+  </data>
+  <data name="HwStop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="HwVibration" xml:space="preserve">
+    <value>Vibration &amp; Haptics</value>
+  </data>
+  <data name="HwTestFeedback" xml:space="preserve">
+    <value>Test feedback</value>
+  </data>
+  <data name="HwCounterHint" xml:space="preserve">
+    <value>The counter above increments with each test for screencast verification.</value>
+  </data>
+  <data name="HwReady" xml:space="preserve">
+    <value>Ready.</value>
+  </data>
+  <data name="HwCameraUnsupported" xml:space="preserve">
+    <value>This device does not support camera capture.</value>
+  </data>
+  <data name="HwPhotoCancelled" xml:space="preserve">
+    <value>Photo capture cancelled.</value>
+  </data>
+  <data name="HwPhotoSuccess" xml:space="preserve">
+    <value>Food photo captured successfully.</value>
+  </data>
+  <data name="HwCameraPermission" xml:space="preserve">
+    <value>Camera permission was denied. Enable camera access in device settings.</value>
+  </data>
+  <data name="HwPhotoError" xml:space="preserve">
+    <value>Could not take photo — {0}</value>
+  </data>
+  <data name="HwGettingLocation" xml:space="preserve">
+    <value>Getting location...</value>
+  </data>
+  <data name="HwLocationNotFound" xml:space="preserve">
+    <value>Current location could not be found.</value>
+  </data>
+  <data name="HwLocationSuccess" xml:space="preserve">
+    <value>Country, city, and coordinates have been loaded.</value>
+  </data>
+  <data name="HwLocationPermission" xml:space="preserve">
+    <value>Location permission was denied. Enable location access in device settings.</value>
+  </data>
+  <data name="HwLocationError" xml:space="preserve">
+    <value>Could not get location — {0}</value>
+  </data>
+  <data name="HwSpeechError" xml:space="preserve">
+    <value>Text to speech error: {0}</value>
+  </data>
+  <data name="HwSpeechStopped" xml:space="preserve">
+    <value>Reading stopped.</value>
+  </data>
+  <data name="HwFeedbackStatus" xml:space="preserve">
+    <value>Vibration and haptic feedback triggered. The changing counter can be used for screen-recorded verification.</value>
+  </data>
+  <data name="HwFeedbackError" xml:space="preserve">
+    <value>Feedback error: {0}</value>
+  </data>
+  <data name="HwHelpText" xml:space="preserve">
+    <value>NutriBite records foods and drinks, shows nutrition details, and uses camera, location, speech, and haptic feedback to make meal tracking more practical.</value>
+  </data>
+
+  <!-- SettingsPage -->
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>Accessibility</value>
+  </data>
+  <data name="SettingsAppearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="SettingsAppearanceDesc" xml:space="preserve">
+    <value>Switch between system, light, and dark themes.</value>
+  </data>
+  <data name="SettingsThemeTitle" xml:space="preserve">
+    <value>Choose app theme</value>
+  </data>
+  <data name="SettingsThemeSystem" xml:space="preserve">
+    <value>Use system theme</value>
+  </data>
+  <data name="SettingsThemeLight" xml:space="preserve">
+    <value>Light theme</value>
+  </data>
+  <data name="SettingsThemeDark" xml:space="preserve">
+    <value>Dark theme</value>
+  </data>
+  <data name="SettingsLargeText" xml:space="preserve">
+    <value>Large text</value>
+  </data>
+  <data name="SettingsLargeTextDesc" xml:space="preserve">
+    <value>Increases text size across all pages.</value>
+  </data>
+  <data name="SettingsLargeTextPreview" xml:space="preserve">
+    <value>Large text preview</value>
+  </data>
+  <data name="SettingsLargeTextOn" xml:space="preserve">
+    <value>Large text preview: enlarged</value>
+  </data>
+  <data name="SettingsLargeTextOnDesc" xml:space="preserve">
+    <value>Text is now noticeably larger. All pages will use the same setting.</value>
+  </data>
+  <data name="SettingsLargeTextOffDesc" xml:space="preserve">
+    <value>Turn on the switch to enlarge this preview and other page text.</value>
+  </data>
+  <data name="SettingsLargeTextOnAnnounce" xml:space="preserve">
+    <value>Large text mode is on. Page text is now larger.</value>
+  </data>
+  <data name="SettingsLargeTextOffAnnounce" xml:space="preserve">
+    <value>Large text mode is off. Page text has returned to normal.</value>
+  </data>
+  <data name="SettingsThemeAnnounce" xml:space="preserve">
+    <value>Theme preference updated.</value>
+  </data>
+  <data name="SettingsReady" xml:space="preserve">
+    <value>Settings ready.</value>
+  </data>
+
+  <!-- Language -->
+  <data name="SettingsLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="SettingsLanguageDesc" xml:space="preserve">
+    <value>Change the display language of the app.</value>
+  </data>
+  <data name="LanguageEnglish" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="LanguageChinese" xml:space="preserve">
+    <value>中文</value>
+  </data>
+
+  <!-- Categories -->
+  <data name="CategoryBreakfast" xml:space="preserve">
+    <value>Breakfast</value>
+  </data>
+  <data name="CategoryLunch" xml:space="preserve">
+    <value>Lunch</value>
+  </data>
+  <data name="CategoryDinner" xml:space="preserve">
+    <value>Dinner</value>
+  </data>
+  <data name="CategorySnack" xml:space="preserve">
+    <value>Snack</value>
+  </data>
+  <data name="CategoryDrink" xml:space="preserve">
+    <value>Drink</value>
+  </data>
+</root>
