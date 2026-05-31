@@ -107,6 +107,8 @@ The app follows WCAG 2.x principles:
 
 ## Author
 
+- **Name:** Zhang Boyan
+- **Student ID:** 21906056
 - **GitHub:** zby-1-s
 - **Module:** 6G6Z0014 Mobile Computing (1CWK100)
 - **Institution:** Manchester Metropolitan University
