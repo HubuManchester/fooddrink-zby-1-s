@@ -63,19 +63,19 @@ public sealed class LocalizationService : INotifyPropertyChanged
     public void SetLanguage(string cultureName)
     {
         CurrentCulture = new CultureInfo(cultureName);
-        MainThread.BeginInvokeOnMainThread(async () =>
+        MainThread.BeginInvokeOnMainThread(() =>
         {
-            // Invalidate cached pages in every tab so they re-parse XAML.
+            // Kill all cached pages.
             foreach (var shellItem in Shell.Current.Items)
             foreach (var shellSection in shellItem.Items)
             foreach (var shellContent in shellSection.Items)
-            {
-                var t = shellContent.ContentTemplate;
-                shellContent.ContentTemplate = null;
-                shellContent.ContentTemplate = t;
-            }
+                shellContent.Content = null;
 
-            await Shell.Current.GoToAsync("//MainPage");
+            // Defer navigation so Content=null is processed first.
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await Shell.Current.GoToAsync("//MainPage");
+            });
         });
     }
 
