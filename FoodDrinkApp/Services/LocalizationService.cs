@@ -57,14 +57,24 @@ public sealed class LocalizationService : INotifyPropertyChanged
     }
 
     /// <summary>
-    /// Switches the UI language and navigates to root to recreate all pages
-    /// with the new culture, refreshing every TranslateExtension value.
+    /// Switches the UI language, navigates to root, and invalidates all
+    /// cached tab pages so every ShellContent is recreated with new strings.
     /// </summary>
     public void SetLanguage(string cultureName)
     {
         CurrentCulture = new CultureInfo(cultureName);
         MainThread.BeginInvokeOnMainThread(async () =>
         {
+            // Invalidate cached pages in every tab so they re-parse XAML.
+            foreach (var shellItem in Shell.Current.Items)
+            foreach (var shellSection in shellItem.Items)
+            foreach (var shellContent in shellSection.Items)
+            {
+                var t = shellContent.ContentTemplate;
+                shellContent.ContentTemplate = null;
+                shellContent.ContentTemplate = t;
+            }
+
             await Shell.Current.GoToAsync("//MainPage");
         });
     }
