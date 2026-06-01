@@ -56,10 +56,17 @@ public sealed class LocalizationService : INotifyPropertyChanged
         }
     }
 
-    /// <summary>Switches the UI language and refreshes all bound strings.</summary>
+    /// <summary>
+    /// Switches the UI language and navigates to root to recreate all pages
+    /// with the new culture, refreshing every TranslateExtension value.
+    /// </summary>
     public void SetLanguage(string cultureName)
     {
         CurrentCulture = new CultureInfo(cultureName);
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            await Shell.Current.GoToAsync("//MainPage");
+        });
     }
 
     /// <summary>True when the current culture matches the given name.</summary>
